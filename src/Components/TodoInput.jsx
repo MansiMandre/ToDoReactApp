@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
 
 function TodoInput({ addTodo }) {
   const [text, setText] = useState("");
@@ -14,20 +15,28 @@ function TodoInput({ addTodo }) {
   };
 
   return (
-    <form onSubmit={handleSubmit} style={{
-      display: 'flex',
-      gap: '10px',
-      marginBottom: '20px',
-      justifyContent: 'center'
-    }}>
+    <motion.form
+      onSubmit={handleSubmit}
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        gap: '10px',
+        marginBottom: '20px',
+      }}
+    >
       <input
         type="text"
         placeholder="Add a new task..."
         value={text}
         onChange={(e) => setText(e.target.value)}
         style={{
+          flex: '1 1 auto',
+          minWidth: '200px',
           padding: '10px',
-          flex: 1,
           borderRadius: '5px',
           border: '1px solid #ccc',
           fontSize: '16px'
@@ -37,6 +46,8 @@ function TodoInput({ addTodo }) {
         value={status}
         onChange={(e) => setStatus(e.target.value)}
         style={{
+          flex: '0 0 160px',
+          minWidth: '120px',
           padding: '10px',
           borderRadius: '5px',
           border: '1px solid #ccc',
@@ -47,18 +58,26 @@ function TodoInput({ addTodo }) {
         <option value="in-process">In Process</option>
         <option value="completed">Completed</option>
       </select>
-      <button type="submit" style={{
-        backgroundColor: '#1976d2',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        padding: '10px 16px',
-        fontSize: '16px',
-        cursor: 'pointer'
-      }}>
+      <motion.button
+        type="submit"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        style={{
+          flex: '0 0 120px',
+          minWidth: '100px',
+          backgroundColor: '#1976d2',
+          color: 'white',
+          border: 'none',
+          borderRadius: '5px',
+          padding: '10px 16px',
+          fontSize: '16px',
+          cursor: 'pointer',
+          boxShadow: '0 2px 5px rgba(0,0,0,0.1)'
+        }}
+      >
         Add Task
-      </button>
-    </form>
+      </motion.button>
+    </motion.form>
   );
 }
 
